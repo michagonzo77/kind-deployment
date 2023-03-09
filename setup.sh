@@ -23,4 +23,15 @@ sudo chmod 777 $HOME/.kube
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 sudo kind get kubeconfig >> $HOME/.kube/config
 
+# Install Arkade
+curl -SLsf https://get.arkade.dev/ | sudo sh
+
+# Install OpenFaaS app using Arkade
+arkade install openfaas
+
+# Get the password from the installed OpenFaaS installation
+PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath="{.data.basic-auth-password}" | base64 --decode; echo)
+
+echo "Gateway password is: ${PASSWORD}.
+Paste this password in the runner creation prompt in Kubiya"
 echo "Done!"

@@ -32,6 +32,6 @@ arkade install openfaas
 # Get the password from the installed OpenFaaS installation
 PASSWORD=$(kubectl get secret -n openfaas basic-auth -o jsonpath="{.data.basic-auth-password}" | base64 --decode; echo)
 
-echo "Gateway password is: ${PASSWORD}.
+echo "Gateway password is: ${PASSWORD}
 Paste this password in the runner creation prompt in Kubiya"
 echo "Done!"
